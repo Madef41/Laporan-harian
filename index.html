@@ -2,6 +2,8 @@
 
 <html lang="id">
 <head>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#000000">
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Laporan Keuangan Mobil</title>
@@ -533,6 +535,14 @@ function downloadPDF(){
     html2canvas:{ scale:3 },
     jsPDF:{ unit:'mm', format:'a4', orientation:'portrait' }
   }).from(element).save();
+}
+</script>
+
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('service-worker.js')
+    .then(() => console.log('SW aktif'))
+    .catch(err => console.log('SW error:', err));
 }
 </script>
   
