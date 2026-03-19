@@ -453,6 +453,7 @@ LAPORAN KEUANGAN MOBIL, TGL :
 <div class="menu">
 <button onclick="laporanBaru()">Laporan Baru</button>
 <button onclick="simpan()">Simpan Laporan</button>
+<button onclick="downloadPDF()">Download PDF</button> <!-- TAMBAHAN -->
 <button onclick="window.print()">Download / Print PDF</button>
 </div>
 </div> <!-- penutup container / kertas -->
@@ -517,5 +518,24 @@ localStorage.setItem("laporan_mobil",JSON.stringify(data))
 })
 })
 </script>
-</div></body>
+</script>
+
+<script src="html2pdf.js"></script>
+
+<script>
+function downloadPDF(){
+  let element = document.querySelector(".paper");
+
+  html2pdf().set({
+    margin:0,
+    filename:'laporan_'+new Date().toISOString().slice(0,10)+'.pdf',
+    image:{ type:'jpeg', quality:1 },
+    html2canvas:{ scale:3 },
+    jsPDF:{ unit:'mm', format:'a4', orientation:'portrait' }
+  }).from(element).save();
+}
+</script>
+  
+</body>
 </html>
+
